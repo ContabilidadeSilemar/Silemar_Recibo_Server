@@ -9,7 +9,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
-    .setTitle('Silemar Recibos(Conatbilidade Silemar)')
+    .setTitle('Silemar Recibos(Contabilidade Silemar)')
     .setDescription('aplicação para gestão de recibos ')
     .setVersion('1.0.0')
     .build();
