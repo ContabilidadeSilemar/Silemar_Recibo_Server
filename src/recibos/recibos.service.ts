@@ -35,8 +35,8 @@ export class RecibosService {
 
   async update(id: string, updateReciboDto: UpdateReciboDto) {
     await this.findOne(id);
-    const data: any = { ...updateReciboDto };
-    this.prisma.recibo.update({ data, where: { id } });
+    const data: Partial<any> = { ...updateReciboDto };
+    this.prisma.recibo.update({ data, where: { id } }).catch(this.handleError);
   }
 
   async remove(id: string) {
