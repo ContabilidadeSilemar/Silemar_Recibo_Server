@@ -35,13 +35,6 @@ export class CreateReciboDto {
   @IsNotEmpty()
   amount: number[];
   @ApiProperty({
-    description: 'Valor total a ser pago do recibo :',
-    example: '3000',
-  })
-  @IsString()
-  @IsNotEmpty()
-  total_amount: string;
-  @ApiProperty({
     description: 'Nome do Emitente:',
     example: 'Fulano',
   })

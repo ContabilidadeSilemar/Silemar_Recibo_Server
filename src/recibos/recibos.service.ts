@@ -14,7 +14,13 @@ export class RecibosService {
   }
 
   create(createReciboDto: CreateReciboDto) {
-    const recibo: any = { ...createReciboDto };
+    const recibo: Recibo | any = { ...createReciboDto };
+    let total = 0;
+    recibo.amount.forEach((element) => (total = total + element));
+
+    recibo.total_amount = `${total}`;
+    console.log(total);
+
     return this.prisma.recibo.create({ data: recibo }).catch(this.handleError);
   }
 
@@ -23,7 +29,7 @@ export class RecibosService {
   }
 
   async findOne(id: string): Promise<Recibo> {
-    const record: any = await this.prisma.recibo.findUnique({
+    const record: Recibo | any = await this.prisma.recibo.findUnique({
       where: { id },
     });
     if (!record) {
