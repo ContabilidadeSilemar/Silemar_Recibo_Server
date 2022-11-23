@@ -6,11 +6,13 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
 } from '@nestjs/common';
 import { RecibosService } from './recibos.service';
 import { CreateReciboDto } from './dto/create-recibo.dto';
 import { UpdateReciboDto } from './dto/update-recibo.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { HttpStatus } from '@nestjs/common/enums';
 
 @ApiTags('Recibo')
 @Controller('recibos')
@@ -42,8 +44,9 @@ export class RecibosController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({ summary: 'Apagar um recibo pelo seu Id' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: string): Promise<void> {
     return this.recibosService.remove(id);
   }
 }
