@@ -14,8 +14,8 @@ model recibo {
   id           String   @id @default(uuid())
   name         String
   doc          String
-  description  String
-  amount       String
+  description  String[]
+  amount       Int[]
   total_amount String
   issuer       String
   createdAt    DateTime @default(now())

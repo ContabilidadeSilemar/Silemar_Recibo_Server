@@ -1,4 +1,10 @@
-import { IsPositive, IsNumber, IsString, IsNotEmpty } from 'class-validator';
+import {
+  IsPositive,
+  IsNumber,
+  IsString,
+  IsNotEmpty,
+  isArray,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateReciboDto {
@@ -18,18 +24,16 @@ export class CreateReciboDto {
   doc: string;
   @ApiProperty({
     description: 'Descrição dos pagamentos:',
-    example: 'Honorario Referente ao mes de Janeiro',
+    example: ['Honorario Referente ao mes de Janeiro', 'teste honorario'],
   })
-  @IsString()
   @IsNotEmpty()
-  description: string;
+  description: string[];
   @ApiProperty({
     description: 'Valores a serem cobrados:',
-    example: '1000, 2000',
+    example: [1000, 2000],
   })
-  @IsString()
   @IsNotEmpty()
-  amount: string;
+  amount: number[];
   @ApiProperty({
     description: 'Valor total a ser pago do recibo :',
     example: '3000',
