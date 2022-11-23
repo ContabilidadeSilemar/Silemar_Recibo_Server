@@ -14,7 +14,7 @@ export class RecibosService {
   }
 
   create(createReciboDto: CreateReciboDto) {
-    const recibo: Recibo = { ...createReciboDto };
+    const recibo: any = { ...createReciboDto };
     return this.prisma.recibo.create({ data: recibo }).catch(this.handleError);
   }
 
@@ -22,8 +22,8 @@ export class RecibosService {
     return this.prisma.recibo.findMany();
   }
 
-  async findOne(id: string) {
-    const record: Recibo = await this.prisma.recibo.findUnique({
+  async findOne(id: string): Promise<Recibo> {
+    const record: any = await this.prisma.recibo.findUnique({
       where: { id },
     });
     if (!record) {
