@@ -26,13 +26,13 @@ export class CreateReciboDto {
     description: 'Descrição dos pagamentos:',
     example: ['Honorario Referente ao mes de Janeiro', 'teste honorario'],
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ each: false })
   description: string[];
   @ApiProperty({
     description: 'Valores a serem cobrados:',
     example: [1000, 2000],
   })
-  @IsNotEmpty()
+  @IsNotEmpty({ each: false })
   amount: number[];
   @ApiProperty({
     description: 'Nome do Emitente:',

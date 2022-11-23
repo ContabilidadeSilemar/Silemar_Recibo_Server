@@ -3,15 +3,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateReciboDto } from './dto/create-recibo.dto';
 import { UpdateReciboDto } from './dto/update-recibo.dto';
 import { Recibo } from './entities/recibo.entity';
+import { UnprocessableEntityException } from '@nestjs/common/exceptions';
 
 @Injectable()
 export class RecibosService {
   constructor(private readonly prisma: PrismaService) {}
-
-  handleError(error: Error) {
-    console.log(error);
-    return undefined;
-  }
 
   create(createReciboDto: CreateReciboDto) {
     const recibo: Recibo | any = { ...createReciboDto };
@@ -41,12 +37,23 @@ export class RecibosService {
 
   async update(id: string, updateReciboDto: UpdateReciboDto) {
     await this.findOne(id);
-    const data: Partial<any> = { ...updateReciboDto };
+    const data: Partial<Recibo | any> = { ...updateReciboDto };
     this.prisma.recibo.update({ data, where: { id } }).catch(this.handleError);
   }
 
   async remove(id: string) {
     await this.findOne(id);
     await this.prisma.recibo.delete({ where: { id } });
+  }
+
+  handleError(error: Error): undefined {
+    const errorLine = error.message?.split('\n');
+    const lastErrorline = errorLine[errorLine.length - 1]?.trim();
+    if (lastErrorline) {
+      console.log(error);
+    }
+    throw new UnprocessableEntityException(
+      lastErrorline || 'algum erro aconteceu ao executar a operação',
+    );
   }
 }
