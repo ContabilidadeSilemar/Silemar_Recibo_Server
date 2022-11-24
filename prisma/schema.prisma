@@ -16,7 +16,7 @@ model recibo {
   doc          String
   description  String[]
   amount       Float[]
-  total_amount String
+  total_amount Float
   issuer       String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

@@ -4,20 +4,27 @@ import { CreateReciboDto } from './dto/create-recibo.dto';
 import { UpdateReciboDto } from './dto/update-recibo.dto';
 import { Recibo } from './entities/recibo.entity';
 import { UnprocessableEntityException } from '@nestjs/common/exceptions';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class RecibosService {
   constructor(private readonly prisma: PrismaService) {}
 
   create(createReciboDto: CreateReciboDto) {
-    const recibo: Recibo | any = { ...createReciboDto };
+    let recibo: Recibo = { ...createReciboDto };
     let total = 0;
-    recibo.amount.forEach((element) => (total = total + element));
+    recibo.amount.forEach((element: number) => (total = total + element));
+    recibo.total_amount = total;
 
-    recibo.total_amount = `${total}`;
-    console.log(total);
-
-    return this.prisma.recibo.create({ data: recibo }).catch(this.handleError);
+    let data: Prisma.reciboCreateInput = {
+      name: recibo.name,
+      amount: recibo.amount,
+      description: recibo.description,
+      doc: recibo.doc,
+      issuer: recibo.issuer,
+      total_amount: total,
+    };
+    return this.prisma.recibo.create({ data }).catch(this.handleError);
   }
 
   findAll() {
@@ -25,7 +32,7 @@ export class RecibosService {
   }
 
   async findOne(id: string): Promise<Recibo> {
-    const record: Recibo | any = await this.prisma.recibo.findUnique({
+    const record: Recibo = await this.prisma.recibo.findUnique({
       where: { id },
     });
     if (!record) {
@@ -37,7 +44,7 @@ export class RecibosService {
 
   async update(id: string, updateReciboDto: UpdateReciboDto) {
     await this.findOne(id);
-    const data: Partial<Recibo | any> = { ...updateReciboDto };
+    const data: Partial<Recibo> = { ...updateReciboDto };
     this.prisma.recibo.update({ data, where: { id } }).catch(this.handleError);
   }
 
