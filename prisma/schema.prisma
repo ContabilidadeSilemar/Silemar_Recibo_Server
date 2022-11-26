@@ -25,7 +25,7 @@ model empresas {
   cep                   String
   cnaePrincipalCodigo   String
   cnaePrincipalDescricao String
-  cnpj                  String
+  cnpj                  String @unique
   complemento           String
   ddd                   String
   email                 String
