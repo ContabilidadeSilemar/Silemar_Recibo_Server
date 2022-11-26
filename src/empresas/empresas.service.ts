@@ -41,10 +41,6 @@ export class EmpresasService {
     await this.prisma.empresas.delete({ where: { id } });
   }
   handleError(error: Error): undefined {
-    console.log(
-      'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
-      error,
-    );
     const errorLine = error.message?.split('\n');
     const lastErrorline = errorLine[errorLine.length - 1]?.trim();
     if (lastErrorline) {
