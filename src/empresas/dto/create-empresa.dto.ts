@@ -23,7 +23,7 @@ export class CreateEmpresaDto {
     description: 'descição do  cenae da empresa',
     example: 'atividades de contabilidade',
   })
-  cnaePrincipalDescicao: string;
+  cnaePrincipalDescricao: string;
 
   @ApiProperty({
     description: 'cnpj da empresa ',

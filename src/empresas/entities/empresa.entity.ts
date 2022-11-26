@@ -3,7 +3,7 @@ export class Empresa {
   bairro: string;
   cep: string;
   cnaePrincipalCodigo: string;
-  cnaePrincipalDescicao: string;
+  cnaePrincipalDescricao: string;
   cnpj: string;
   complemento: string;
   dataAbertura: string;

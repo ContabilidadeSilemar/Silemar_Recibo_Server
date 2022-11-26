@@ -29,7 +29,7 @@ model empresas {
 
   cnaePrincipalCodigo String
 
-  cnaePrincipalDescicao String
+  cnaePrincipalDescricao String
 
   cnpj String
 
