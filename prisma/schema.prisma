@@ -20,24 +20,30 @@ model recibo {
 }
 
 model empresas {
-  id                    String @id @default(uuid())
-  bairro                String
-  cep                   String
-  cnaePrincipalCodigo   String
+  id                     String @id @default(uuid())
+  bairro                 String
+  cep                    String
+  cnaePrincipalCodigo    String
   cnaePrincipalDescricao String
-  cnpj                  String @unique
-  complemento           String
-  ddd                   String
-  email                 String
-  logradouro            String
-  municipio             String
-  nomeFantasia          String
-  numero                String
-  razaoSocial           String
-  status                String
-  telefone              String
-  tipoLogradouro        String
-  uf                    String
-  dataAbertura          String
- 
+  cnpj                   String @unique
+  complemento            String
+  ddd                    String
+  email                  String
+  logradouro             String
+  municipio              String
+  nomeFantasia           String
+  numero                 String
+  razaoSocial            String
+  status                 String
+  telefone               String
+  tipoLogradouro         String
+  uf                     String
+  dataAbertura           String
+}
+
+model pessoas {
+  id             String @id @default(uuid())
+  nome           String
+  cpf            String
+  dataNascimento String
 }
