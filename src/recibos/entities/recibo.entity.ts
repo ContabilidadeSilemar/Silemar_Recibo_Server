@@ -8,4 +8,5 @@ export class Recibo {
   issuer: string;
   createdAt?: Date;
   updatedAt?: Date;
+  number: number;
 }

@@ -17,6 +17,7 @@ model recibo {
   issuer       String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  number       Int
 }
 
 model empresas {

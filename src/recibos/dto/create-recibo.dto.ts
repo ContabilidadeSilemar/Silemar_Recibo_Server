@@ -44,4 +44,11 @@ export class CreateReciboDto {
   @IsString()
   @IsNotEmpty()
   issuer: string;
+
+  @ApiProperty({
+    description: 'Numero do recibo:',
+    example: '12',
+  })
+  @IsNotEmpty()
+  number: number;
 }

@@ -23,6 +23,7 @@ export class RecibosService {
       doc: recibo.doc,
       issuer: recibo.issuer,
       total_amount: total,
+      number: recibo.number,
     };
     return this.prisma.recibo.create({ data }).catch(this.handleError);
   }
