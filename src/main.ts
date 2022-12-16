@@ -12,6 +12,7 @@ async function bootstrap() {
     .setTitle('Silemar Recibos(Contabilidade Silemar)')
     .setDescription('aplicação para gestão de recibos ')
     .setVersion('1.0.0')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

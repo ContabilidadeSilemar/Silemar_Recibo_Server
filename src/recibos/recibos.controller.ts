@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { RecibosService } from './recibos.service';
 import { CreateReciboDto } from './dto/create-recibo.dto';
 import { UpdateReciboDto } from './dto/update-recibo.dto';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { HttpStatus } from '@nestjs/common/enums';
 
 @ApiTags('Recibo')
@@ -20,32 +22,42 @@ export class RecibosController {
   constructor(private readonly recibosService: RecibosService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Emitir novo recibo' })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Issue a new receipt.' })
   create(@Body() createReciboDto: CreateReciboDto) {
     return this.recibosService.create(createReciboDto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Buscar todos os recibos' })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'List all receipts.' })
   findAll() {
     return this.recibosService.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Buscar um recibo pelo seu Id' })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Search for a receipt by id.' })
   findOne(@Param('id') id: string) {
     return this.recibosService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Alterar um recibo pelo seu Id' })
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Change a receipt by id.' })
   update(@Param('id') id: string, @Body() updateReciboDto: UpdateReciboDto) {
     return this.recibosService.update(id, updateReciboDto);
   }
 
   @Delete(':id')
+  @UseGuards(AuthGuard())
+  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiOperation({ summary: 'Apagar um recibo pelo seu Id' })
+  @ApiOperation({ summary: 'Delete a receipt by id.' })
   remove(@Param('id') id: string): Promise<void> {
     return this.recibosService.remove(id);
   }
