@@ -22,8 +22,6 @@ export class EmpresasController {
   constructor(private readonly empresasService: EmpresasService) {}
 
   @Post()
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Register a new company.',
   })
@@ -32,8 +30,6 @@ export class EmpresasController {
   }
 
   @Get()
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'List all company.',
   })
@@ -42,8 +38,6 @@ export class EmpresasController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Search company by id.',
   })
@@ -52,8 +46,6 @@ export class EmpresasController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Change company by id.',
   })
@@ -62,8 +54,6 @@ export class EmpresasController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: 'Delete company by id.',

@@ -30,34 +30,28 @@ export class UserController {
   }
 
   @Get('')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Only Admin - List all users.',
   })
-  findAll(@LoggedUser() user: User) {
+  findAll(user: User) {
     return this.userService.findAll(user);
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Only Admin - Find one user by ID.',
   })
-  findOne(@LoggedUser() user: User, @Param('id') id: string) {
+  findOne(user: User, @Param('id') id: string) {
     return this.userService.findOne(id, user);
   }
 
-  // @Delete(':id')
-  // @UseGuards(AuthGuard())
-  // @ApiBearerAuth()
-  // @ApiOperation({
-  //   summary: 'Only Admin - Delete user by ID.',
-  // })
-  // deleteUser(@LoggedUser() user: User, @Param('id') id: string) {
-  //   return this.userService.deleteUser(id, user);
-  // }
+  @Delete(':id')
+  @ApiOperation({
+    summary: 'Only Admin - Delete user by ID.',
+  })
+  deleteUser(user: User, @Param('id') id: string) {
+    return this.userService.deleteUser(id, user);
+  }
 
   // @Get('details/my-account')
   // @UseGuards(AuthGuard())
@@ -70,12 +64,10 @@ export class UserController {
   // }
 
   // @Patch('update/my-account')
-  // @UseGuards(AuthGuard())
-  // @ApiBearerAuth()
   // @ApiOperation({
   //   summary: 'Edit data from logged account.',
   // })
-  // update(@LoggedUser() user: User, @Body() dto: UpdateUserDto) {
+  // update( user: User, @Body() dto: UpdateUserDto) {
   //   return this.userService.update(user.id, dto);
   // }
 

@@ -70,66 +70,66 @@ export class UserService {
     return record;
   }
 
-  // async deleteUser(id: string, user: User) {
-  //   isAdmin(user);
-  //   await this.findOne(id, user);
+  async deleteUser(id: string, user: User) {
+    // isAdmin(user);
+    await this.findOne(id, user);
 
-  //   await this.prisma.user.delete({
-  //     where: { id },
-  //   });
-  //   const data = {
-  //     success: true,
-  //     message: 'User deleted successfully',
-  //   };
-  //   return data;
-  // }
+    await this.prisma.user.delete({
+      where: { id },
+    });
+    const data = {
+      success: true,
+      message: 'User deleted successfully',
+    };
+    return data;
+  }
 
   ///////////////////////////  MY ACCOUNT
-  // async myAccount(userId: string) {
-  //   const record = await this.prisma.user.findUnique({
-  //     where: { id: userId },
-  //     select: this.userSelect,
-  //   });
+  async myAccount(userId: string) {
+    const record = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: this.userSelect,
+    });
 
-  //   return record;
-  // }
+    return record;
+  }
 
-  // async update(userId: string, dto: UpdateUserDto) {
-  //   await this.myAccount(userId);
+  async update(userId: string, dto: UpdateUserDto) {
+    await this.myAccount(userId);
 
-  //   if (dto.password) {
-  //     if (dto.password != dto.confirmPassword) {
-  //       throw new BadRequestException('As senhas informadas não são iguais.');
-  //     }
-  //   }
+    if (dto.password) {
+      if (dto.password != dto.confirmPassword) {
+        throw new BadRequestException('As senhas informadas não são iguais.');
+      }
+    }
 
-  //   delete dto.confirmPassword;
+    delete dto.confirmPassword;
 
-  //   const data: Partial<User> = { ...dto };
+    const data: Partial<User> = { ...dto };
 
-  //   if (data.password) {
-  //     data.password = await bcrypt.hash(data.password, 10);
-  //   }
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, 10);
+    }
 
-  //   return this.prisma.user
-  //     .update({
-  //       where: { id: userId },
-  //       data,
-  //       select: this.userSelect,
-  //     })
-  //     .catch(handleError);
-  // }
+    return this.prisma.user
+      .update({
+        where: { id: userId },
+        data,
+        select: this.userSelect,
+      })
+      .catch(handleError);
+  }
 
-  // async delete(userId: string) {
-  //   await this.myAccount(userId);
+  async delete(userId: string) {
+    await this.myAccount(userId);
 
-  //   await this.prisma.user.delete({
-  //     where: { id: userId },
-  //   });
-  //   const data = {
-  //     success: true,
-  //     message: 'User deleted successfully',
-  //   };
-  //   return data;
-  // }
+    await this.prisma.user.delete({
+      where: { id: userId },
+    });
+    const data = {
+      success: true,
+      message: 'User deleted successfully',
+    };
+    return data;
+  }
 }

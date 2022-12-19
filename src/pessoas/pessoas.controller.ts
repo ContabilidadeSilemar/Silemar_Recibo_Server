@@ -22,8 +22,6 @@ export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) {}
 
   @Post()
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Register a new person.',
   })
@@ -32,8 +30,6 @@ export class PessoasController {
   }
 
   @Get()
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'List all person.',
   })
@@ -42,8 +38,6 @@ export class PessoasController {
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Search person by id.',
   })
@@ -52,8 +46,6 @@ export class PessoasController {
   }
 
   @Patch(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Edit person by id.',
   })
@@ -62,8 +54,6 @@ export class PessoasController {
   }
 
   @Delete(':id')
-  @UseGuards(AuthGuard())
-  @ApiBearerAuth()
   @HttpCode(HttpStatus.NO_CONTENT)
   @ApiOperation({
     summary: 'Report person by id.',
