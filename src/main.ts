@@ -11,7 +11,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Silemar Recibos(Contabilidade Silemar)')
     .setDescription('aplicação para gestão de recibos ')
-    .setVersion('1.0.0')
+    .setVersion('1.1.0')
     .addBearerAuth()
     .build();
 
