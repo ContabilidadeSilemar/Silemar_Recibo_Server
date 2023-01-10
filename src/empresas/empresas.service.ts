@@ -10,8 +10,33 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 export class EmpresasService {
   constructor(private readonly prisma: PrismaService) {}
   create(createEmpresaDto: CreateEmpresaDto) {
-    let data: Empresa = { ...createEmpresaDto };
-    return this.prisma.empresas.create({ data }).catch(this.handleError);
+    let data2: any = { ...createEmpresaDto };
+    let data: any = {
+      bairro: data2.BAIRRO,
+      cep: data2.CEP,
+      cnaePrincipalCodigo: data2['CNAE PRINCIPAL CODIGO'],
+      cnaePrincipalDescricao: data2['CNAE PRINCIPAL DESCRICAO'],
+      cnpj: data2.CNPJ,
+      complemento: data2.COMPLEMENTO,
+      dataAbertura: data2['DATA ABERTURA'],
+      ddd: data2.DDD,
+      email: data2.EMAIL,
+      logradouro: data2.LOGRADOURO,
+      municipio: data2.MUNICIPIO,
+      nomeFantasia: data2['NOME FANTASIA'],
+      numero: data2.NUMERO,
+      razaoSocial: data2['RAZAO SOCIAL'],
+      status: data2.STATUS,
+      telefone: data2.TELEFONE,
+      tipoLogradouro: data2['TIPO LOGRADOURO'],
+      uf: data2.UF,
+    };
+
+    if (data.bairro == undefined) {
+      return this.prisma.empresas
+        .create({ data: data2 })
+        .catch(this.handleError);
+    } else this.prisma.empresas.create({ data }).catch(this.handleError);
   }
 
   findAll() {
