@@ -60,7 +60,7 @@ export class UserService {
     return list;
   }
 
-  async findOne(id: string, user: User) {
+  async findOne(id: string) {
     const record = await this.prisma.user.findUnique({
       where: { id },
       select: this.userSelect,
@@ -70,9 +70,9 @@ export class UserService {
     return record;
   }
 
-  async deleteUser(id: string, user: User) {
+  async deleteUser(id: string) {
     // isAdmin(user);
-    await this.findOne(id, user);
+    await this.findOne(id);
 
     await this.prisma.user.delete({
       where: { id },

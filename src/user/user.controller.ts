@@ -41,16 +41,16 @@ export class UserController {
   @ApiOperation({
     summary: 'Only Admin - Find one user by ID.',
   })
-  findOne(user: User, @Param('id') id: string) {
-    return this.userService.findOne(id, user);
+  findOne(@Param('id') id: string) {
+    return this.userService.findOne(id);
   }
 
   @Delete(':id')
   @ApiOperation({
     summary: 'Only Admin - Delete user by ID.',
   })
-  deleteUser(user: User, @Param('id') id: string) {
-    return this.userService.deleteUser(id, user);
+  deleteUser(@Param('id') id: string) {
+    return this.userService.deleteUser(id);
   }
 
   // @Get('details/my-account')

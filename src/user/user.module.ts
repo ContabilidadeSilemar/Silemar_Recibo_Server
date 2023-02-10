@@ -8,5 +8,6 @@ import { PassportModule } from '@nestjs/passport';
   controllers: [UserController],
   providers: [UserService],
   imports: [PrismaModule],
+  exports: [UserService],
 })
 export class UserModule {}
