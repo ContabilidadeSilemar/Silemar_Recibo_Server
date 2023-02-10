@@ -63,13 +63,13 @@ export class UserController {
   //   return this.userService.myAccount(user.id);
   // }
 
-  // @Patch('update/my-account')
-  // @ApiOperation({
-  //   summary: 'Edit data from logged account.',
-  // })
-  // update( user: User, @Body() dto: UpdateUserDto) {
-  //   return this.userService.update(user.id, dto);
-  // }
+  @Patch('update/:id')
+  @ApiOperation({
+    summary: 'Edit data from logged account.',
+  })
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(id, updateUserDto);
+  }
 
   // @Delete('delete/my-account')
   // @UseGuards(AuthGuard())

@@ -94,8 +94,8 @@ export class UserService {
     return record;
   }
 
-  async update(userId: string, dto: UpdateUserDto) {
-    await this.myAccount(userId);
+  async update(id, dto: UpdateUserDto) {
+    await this.myAccount(id);
 
     if (dto.password) {
       if (dto.password != dto.confirmPassword) {
@@ -113,7 +113,7 @@ export class UserService {
 
     return this.prisma.user
       .update({
-        where: { id: userId },
+        where: { id: id },
         data,
         select: this.userSelect,
       })

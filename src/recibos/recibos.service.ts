@@ -1,3 +1,5 @@
+import { IsadminService } from './../isadmin/isadmin.service';
+
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateReciboDto } from './dto/create-recibo.dto';
@@ -8,9 +10,12 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class RecibosService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly IsadminService: IsadminService,
+  ) {}
 
-  create(createReciboDto: CreateReciboDto) {
+  async create(createReciboDto: CreateReciboDto) {
     let recibo: Recibo = { ...createReciboDto };
     let total = 0;
     recibo.amount.forEach((element: number) => (total = total + element));
@@ -24,12 +29,21 @@ export class RecibosService {
       issuer: recibo.issuer,
       total_amount: total,
       number: recibo.number,
+      user: {
+        connect: { id: createReciboDto.userId },
+      },
     };
     return this.prisma.recibo.create({ data }).catch(this.handleError);
   }
 
-  findAll() {
-    return this.prisma.recibo.findMany();
+  async findAll(userId: string) {
+    const is = await this.IsadminService.findOne(userId);
+    console.log(is.isAdmin);
+    if (is.isAdmin) {
+      return this.prisma.recibo.findMany();
+    } else {
+      return this.prisma.recibo.findMany({ where: { userId } });
+    }
   }
 
   async findOne(id: string): Promise<Recibo> {

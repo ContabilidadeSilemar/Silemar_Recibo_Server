@@ -27,10 +27,10 @@ export class RecibosController {
     return this.recibosService.create(createReciboDto);
   }
 
-  @Get()
-  @ApiOperation({ summary: 'List all receipts.' })
-  findAll() {
-    return this.recibosService.findAll();
+  @Get('/user/:userId')
+  @ApiOperation({ summary: 'List all receipts user' })
+  findAll(@Param('userId') id: string) {
+    return this.recibosService.findAll(id);
   }
 
   @Get(':id')

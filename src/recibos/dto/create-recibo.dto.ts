@@ -4,6 +4,7 @@ import {
   IsString,
   IsNotEmpty,
   isArray,
+  IsUUID,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -51,4 +52,10 @@ export class CreateReciboDto {
   })
   @IsNotEmpty()
   number: number;
+  @IsUUID()
+  @ApiProperty({
+    description: 'id de um usuario',
+    example: '0ce7ec04-b005-4860-b449-1653adda34e9',
+  })
+  userId: string;
 }
