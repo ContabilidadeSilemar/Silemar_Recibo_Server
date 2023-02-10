@@ -1,3 +1,4 @@
+import { Length } from 'class-validator';
 import { IsadminService } from './../isadmin/isadmin.service';
 
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -38,12 +39,18 @@ export class RecibosService {
 
   async findAll(userId: string) {
     const is = await this.IsadminService.findOne(userId);
-    console.log(is.isAdmin);
+
     if (is.isAdmin) {
       return this.prisma.recibo.findMany();
     } else {
       return this.prisma.recibo.findMany({ where: { userId } });
     }
+  }
+
+  async findLength() {
+    let tudo = await this.prisma.recibo.findMany();
+    let tamanho = tudo.length;
+    return { lastReceipt: tamanho + 1 };
   }
 
   async findOne(id: string): Promise<Recibo> {

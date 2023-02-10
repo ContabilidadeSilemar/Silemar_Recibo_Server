@@ -15,6 +15,7 @@ import { CreateReciboDto } from './dto/create-recibo.dto';
 import { UpdateReciboDto } from './dto/update-recibo.dto';
 import { ApiOperation, ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { HttpStatus } from '@nestjs/common/enums';
+import { get } from 'http';
 
 @ApiTags('Recibo')
 @Controller('recibos')
@@ -31,6 +32,10 @@ export class RecibosController {
   @ApiOperation({ summary: 'List all receipts user' })
   findAll(@Param('userId') id: string) {
     return this.recibosService.findAll(id);
+  }
+  @Get('/last')
+  findLength() {
+    return this.recibosService.findLength();
   }
 
   @Get(':id')
