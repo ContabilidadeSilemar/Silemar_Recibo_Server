@@ -1,42 +1,15 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { Controller, Get, Param } from '@nestjs/common';
 import { IsadminService } from './isadmin.service';
-import { CreateIsadminDto } from './dto/create-isadmin.dto';
-import { UpdateIsadminDto } from './dto/update-isadmin.dto';
 
+@ApiTags('isAdmin')
 @Controller('isadmin')
 export class IsadminController {
   constructor(private readonly isadminService: IsadminService) {}
 
-  // @Post()
-  // create(@Body() createIsadminDto: CreateIsadminDto) {
-  //   return this.isadminService.create(createIsadminDto);
-  // }
-
-  // @Get()
-  // findAll() {
-  //   return this.isadminService.findAll();
-  // }
-
   @Get(':id')
+  @ApiOperation({ summary: 'Retorna se o usuario informado é admin' })
   findOne(@Param('id') id: string) {
     return this.isadminService.findOne(id);
   }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateIsadminDto: UpdateIsadminDto) {
-  //   return this.isadminService.update(+id, updateIsadminDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.isadminService.remove(+id);
-  // }
 }

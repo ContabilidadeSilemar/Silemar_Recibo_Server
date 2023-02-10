@@ -9,5 +9,6 @@ import { IsadminController } from './isadmin.controller';
   imports: [PrismaModule, UserModule],
   controllers: [IsadminController],
   providers: [IsadminService],
+  exports: [IsadminService],
 })
 export class IsadminModule {}
