@@ -38,7 +38,7 @@ export class RecibosService {
   }
 
   async findAll(userId: any) {
-    const is = await this.IsadminService.findOne(userId);
+    // const is = await this.IsadminService.findOne(userId);
 
     // if (is.isAdmin) {
     return this.prisma.recibo.findMany();
