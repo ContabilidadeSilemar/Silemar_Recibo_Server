@@ -37,14 +37,15 @@ export class RecibosService {
     return this.prisma.recibo.create({ data }).catch(this.handleError);
   }
 
-  async findAll(userId: string) {
+  async findAll(userId: any) {
     const is = await this.IsadminService.findOne(userId);
 
-    if (is.isAdmin) {
-      return this.prisma.recibo.findMany();
-    } else {
-      return this.prisma.recibo.findMany({ where: { userId } });
-    }
+    // if (is.isAdmin) {
+    return this.prisma.recibo.findMany();
+    // }
+    // else {
+    //   return this.prisma.recibo.findMany({ where: { userId } });
+    // }
   }
 
   async findLength() {
