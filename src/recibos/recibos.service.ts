@@ -13,8 +13,8 @@ import { Prisma } from '@prisma/client';
 export class RecibosService {
   constructor(
     private readonly prisma: PrismaService,
-    private readonly IsadminService: IsadminService,
-  ) {}
+  ) // private readonly IsadminService: IsadminService,
+  {}
 
   async create(createReciboDto: CreateReciboDto) {
     let recibo: Recibo = { ...createReciboDto };
@@ -37,7 +37,7 @@ export class RecibosService {
     return this.prisma.recibo.create({ data }).catch(this.handleError);
   }
 
-  async findAll(userId: any) {
+  async findAll() {
     // const is = await this.IsadminService.findOne(userId);
 
     // if (is.isAdmin) {
