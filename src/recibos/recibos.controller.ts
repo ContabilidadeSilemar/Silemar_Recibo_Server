@@ -30,8 +30,8 @@ export class RecibosController {
 
   @Get('/user/:userId')
   @ApiOperation({ summary: 'List all receipts user' })
-  findAll(@Param('userId') id: string) {
-    return this.recibosService.findAll(id);
+  findAll() {
+    return this.recibosService.findAll();
   }
   @Get('/last')
   findLength() {
